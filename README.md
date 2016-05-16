@@ -1,5 +1,5 @@
 ﻿# PowerShell
-###Here's what I used to init my new repo. Do so in lab after installing GIT for windows
+#####Here's what I used to init my new repo. Do so in lab after installing GIT for windows
 * cd c:\
 * mkdir github
 * cd .\github\
