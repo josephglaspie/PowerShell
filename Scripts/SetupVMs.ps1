@@ -1,13 +1,9 @@
 ﻿
+
 #region Setup virtual switch
 $Switch1 = 'SW1'
 New-VMSwitch -Name $Switch1 -NetAdapterName (get-netadapter | ? {$_.status -eq "Up"}).Name |
     Set-VMSwitch -SwitchType External -ErrorAction SilentlyContinue
-#endregion
-
-#region QuickVM
-New-VM -Name VM1 -MemoryStartupBytes 1024MB -NewVHDPath C:\HyperV\VHDs `
-    -NewVHDSizeBytes 20GB -Path C:\HyperV\VMs -Generation 2
 #endregion
 
 #region NewVMs
@@ -19,69 +15,54 @@ New-VHD -Differencing -ParentPath $DifferencingCore -Path $VHDPath -SizeBytes 20
 New-VM -Name $VMname -MemoryStartupBytes 1GB -VHDPath $VHDPath -Path C:\HyperV\VMs -Generation 2 -SwitchName $Switch1 | Start-VM
 
  #endregion
+start-sleep 120
+#region SetNIC
+$vmName = "VMCore1" 
 
-$pwd = ConvertTo-SecureString "Passw0rd" -AsPlainText -Force
-$cred = New-Object System.Management.Automation.PSCredential ("Administrator", $pwd)
+$Msvm_VirtualSystemManagementService = Get-WmiObject -Namespace root\virtualization\v2 `
+    -Class Msvm_VirtualSystemManagementService 
 
-$VM_IPAddress = (Get-VM $VMname | Select-Object -ExpandProperty networkadapters).ipaddresses
-$VM_IPAddress[0]
-#region Configure static IP address on the domain controller before installing ADDS
-function Initialize-VMNetwork
-{
-param(
-[string]$ComputerName,
-[pscredential]$Credential
-)
+$Msvm_ComputerSystem = Get-WmiObject -Namespace root\virtualization\v2 `
+    -Class Msvm_ComputerSystem -Filter "ElementName='$vmName'" 
 
-    $session = New-CimSession -ComputerName $ComputerName -Credential $Credential
-    $VMNetAdapter = Get-NetAdapter -CimSession $session
+$Msvm_VirtualSystemSettingData = ($Msvm_ComputerSystem.GetRelated("Msvm_VirtualSystemSettingData", `
+    "Msvm_SettingsDefineState", $null, $null, "SettingData", "ManagedElement", $false, $null) | % {$_})
 
-    $params1 = @{
-        CimSession = $session
-        IPAddress = '192.168.1.111'
-        PrefixLength = 24
-        InterfaceIndex = $VMNetAdapter.InterfaceIndex
-    }
+$Msvm_SyntheticEthernetPortSettingData = $Msvm_VirtualSystemSettingData.GetRelated("Msvm_SyntheticEthernetPortSettingData")
 
-  
-    New-NetIPAddress @params1
-    
-    Set-NetFirewallProfile -Enabled False -CimSession $session
-}
+$Msvm_GuestNetworkAdapterConfiguration = ($Msvm_SyntheticEthernetPortSettingData.GetRelated( `
+    "Msvm_GuestNetworkAdapterConfiguration", "Msvm_SettingDataComponent", `
+    $null, $null, "PartComponent", "GroupComponent", $false, $null) | % {$_})
 
-Initialize-VMNetwork -ComputerName $VM_IPAddress[0] -Credential $Cred 
+$Msvm_GuestNetworkAdapterConfiguration.DHCPEnabled = $false
+$Msvm_GuestNetworkAdapterConfiguration.IPAddresses = @("192.168.1.111")
+$Msvm_GuestNetworkAdapterConfiguration.Subnets = @("255.255.255.0")
+$Msvm_GuestNetworkAdapterConfiguration.DefaultGateways = @("192.168.1.1")
+$Msvm_GuestNetworkAdapterConfiguration.DNSServers = @("192.168.1.110", "8.8.8.8")
 
-
+$Msvm_VirtualSystemManagementService.SetGuestNetworkAdapterConfiguration( `
+$Msvm_ComputerSystem.Path, $Msvm_GuestNetworkAdapterConfiguration.GetText(1))
 #endregion
 
 
-#region Modify local network adapter (we will lose contact with our VM after setting static IP address)
+#$pwd = ConvertTo-SecureString "Passw0rd" -AsPlainText -Force
+#$cred = New-Object System.Management.Automation.PSCredential ("Administrator", $pwd)
+#Start-Sleep 120
+#$VM_IPAddress = (Get-VM $VMname | Select-Object -ExpandProperty networkadapters).ipaddresses
+#$VM_IPAddress[0]
 
-# Give a static IP address to the network adapter for the internal switch
-$localNetAdapter = Get-NetAdapter *InternalSwitch*
 
-$params2 = @{
-IPAddress = '192.168.0.2'
-DefaultGateway = '192.168.0.1'
-PrefixLength = 24
-InterfaceIndex = $localNetAdapter.InterfaceIndex 
-}
-
-New-NetIPAddress @params2
-
-# Make the network profile "Private"
-Get-NetConnectionProfile -InterfaceAlias *InternalSwitch* | Set-NetConnectionProfile -NetworkCategory Private
-
-# Configure the DNS server to be the new DC
-Set-DnsClientServerAddress -InterfaceIndex $localNetAdapter.InterfaceIndex -ServerAddresses 192.168.0.1 
-
-Test-WSMan 192.168.0.1
-
+#region QuickVM
+New-VM -Name VM1 -MemoryStartupBytes 1024MB -NewVHDPath C:\HyperV\VHDs `
+    -NewVHDSizeBytes 20GB -Path C:\HyperV\VMs -Generation 2
 #endregion
 
 #region Remove VM
+Stop-VM -Name $VMname
 Get-VMHardDiskDrive -VMName $VMname | Remove-VMHardDiskDrive 
 Remove-VM -Name $VMname -Force -Confirm:0
+rm C:\HyperV\VMs\* -Recurse -Confirm:0
+rm $VHDPath -Recurse -Confirm:0 -Force
 #endregion
 
 #region Prep VHDs
