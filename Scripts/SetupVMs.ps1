@@ -1,5 +1,4 @@
 ﻿
-
 #region Setup virtual switch
 $Switch1 = 'SW1'
 New-VMSwitch -Name $Switch1 -NetAdapterName (get-netadapter | ? {$_.status -eq "Up"}).Name |

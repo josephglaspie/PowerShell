@@ -40,7 +40,12 @@ if(!(Test-Path "C:\HyperV\ISOs")){MKDIR "C:\HyperV\ISOs"}
 if(!(Test-Path "C:\HyperV\VMs")){MKDIR "C:\HyperV\VMs"}
 #endregion
 
-#region Install Active Directory, HyperV, and DNS Binaries
+#region Setup GitHub
+if(!(Test-Path "C:\GitHub")){MKDIR "C:\GitHub"}
+
+#endregion
+
+#region Install Active Directory, HyperV, and DNS Binaries REBOOT
 Get-WindowsFeature AD-Domain-Services,Hyper-V,DNS | Install-WindowsFeature -IncludeManagementTools -IncludeAllSubFeature -Confirm:0
 $FeaturesTXT = "c:\temp\Features.txt"
 New-Item $FeaturesTXT -ItemType File -Force 
