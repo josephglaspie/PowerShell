@@ -1,5 +1,5 @@
 ﻿#region Setup NIC
-
+$GlaspiePcPwd = Read-Host "Glaspie-PC password"
 $IP = '192.168.1.110'
 $Mask = '24'
 $GateWay = '192.168.1.1'
@@ -40,9 +40,21 @@ if(!(Test-Path "C:\HyperV\ISOs")){MKDIR "C:\HyperV\ISOs"}
 if(!(Test-Path "C:\HyperV\VMs")){MKDIR "C:\HyperV\VMs"}
 #endregion
 
-#region Setup GitHub
-if(!(Test-Path "C:\GitHub")){MKDIR "C:\GitHub"}
-
+#region Setup Git
+if(!(Test-Path "C:\GitHub")){
+    MKDIR "C:\GitHub"
+    }
+NET USE \\192.168.1.8\isos\BuildScripts /u:glaspie $GlaspiePcPwd
+if(!(Test-Path \\192.168.1.8\isos\BuildScripts\Git-2.8.3-64-bit.exe)){
+    $url = "https://github.com/git-for-windows/git/releases/download/v2.8.3.windows.1/Git-2.8.3-64-bit.exe"
+    $output = "C:\GitHub\Git-2.8.3-64-bit.exe"
+    $start_time = Get-Date
+    (New-Object System.Net.WebClient).DownloadFile($url, $output)
+    Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+    }
+robocopy \\192.168.1.8\isos\BuildScripts\ C:\GitHub 
+NET USE \\192.168.1.8\isos\BuildScripts /D
+.\C:\GitHub\Git-2.8.3-64-bit.exe /VERYSILENT
 #endregion
 
 #region Install Active Directory, HyperV, and DNS Binaries REBOOT

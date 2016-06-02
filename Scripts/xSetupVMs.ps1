@@ -1,5 +1,4 @@
-﻿
-#region Setup virtual switch
+﻿#region Setup virtual switch
 $Switch1 = 'SW1'
 New-VMSwitch -Name $Switch1 -NetAdapterName (get-netadapter | ? {$_.status -eq "Up"}).Name |
     Set-VMSwitch -SwitchType External -ErrorAction SilentlyContinue
@@ -16,7 +15,7 @@ New-VM -Name $VMname -MemoryStartupBytes 1GB -VHDPath $VHDPath -Path C:\HyperV\V
  #endregion
 start-sleep 120
 #region SetNIC
-$vmName = "VMCore1" 
+#$vmName = "VMCore1" 
 
 $Msvm_VirtualSystemManagementService = Get-WmiObject -Namespace root\virtualization\v2 `
     -Class Msvm_VirtualSystemManagementService 
@@ -52,16 +51,17 @@ $Msvm_ComputerSystem.Path, $Msvm_GuestNetworkAdapterConfiguration.GetText(1))
 
 
 #region QuickVM
-New-VM -Name VM1 -MemoryStartupBytes 1024MB -NewVHDPath C:\HyperV\VHDs `
+New-VM -Name VM1 -MemoryStartupBytes 1024MB -NewVHDPath C:\HyperV\VHDs\CoreBase.vhdx `
     -NewVHDSizeBytes 20GB -Path C:\HyperV\VMs -Generation 2
 #endregion
 
-#region Remove VM
+#region Remove VMs
+$VMname = (Get-VM).name 
 Stop-VM -Name $VMname
 Get-VMHardDiskDrive -VMName $VMname | Remove-VMHardDiskDrive 
 Remove-VM -Name $VMname -Force -Confirm:0
 rm C:\HyperV\VMs\* -Recurse -Confirm:0
-rm $VHDPath -Recurse -Confirm:0 -Force
+rm C:\HyperV\VHDs\*.vhdx -Exclude C:\HyperV\VHDs\Base -Confirm:0 
 #endregion
 
 #region Prep VHDs
