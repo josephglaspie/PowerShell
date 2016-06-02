@@ -38,3 +38,32 @@ oscdimg -n -d -m E:\ISOs\2012r2 E:\ISOs\2012r2new.iso
 
     
 #endregion
+
+1. Create WIM
+http://www.danscourses.com/Windows-7-and-8/how-to-create-a-wim-system-image-file-with-windowsaik-and-windowspe.html On boot to winpe step
+ 
+2. Create automated install answer file unattended.xml
+http://misheska.com/blog/2013/07/28/windows-server-2012-automated-install-settings/
+ 
+3. Understanding WSIM
+http://sourcedaddy.com/windows-7/using-windows-system-image-manager.html
+ 
+created WIM, now need to create unattended.xml from the wim
+ 
+1. To get the unattend to work I renamed to autounattend.xml then added it to the          boot.wim in the iso.
+                Copied boot.wim out of iso to M:\temp then mounted the boot.wim
+                imagex /mountrw C:\WAIK\Builds\GUI_ISO_Folder\sources\boot.wim 2 C:\WAIK\Builds\BootWIM
+                dropped the unattend.xml in root of boot.wim next to setup
+                Unmounted and committed WIM
+                imagex /unmount /commit C:\WAIK\Builds\BootWIM
+                Then unzipped the iso, replace the boot.wim with mine and turned it back into is
+               
+                http://superuser.com/questions/764190/autounattend-xml-not-being-recognized-in-virtualbox
+                oscdimg -n -m -bc:\temp\WindowsISO\boot\etfsboot.com C:\temp\WindowsISO C:\temp\WindowsISOdrivers\windows.iso
+ 
+ 
+oscdimg -n -m -c -bc:\WAIK\Builds\GUI_ISO_Folder\boot\Etfsboot.com C:\WAIK\Builds\GUI_ISO_Folder c:\WAIK\builds\2012r2.iso
+ 
+oscdimg -n -m -c C:\temp\alwaysonA C:\temp\alwaysonA.iso
+ 
+svc_sqlpriaus_db
