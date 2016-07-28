@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>WSE Build Status</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="assets/examples.css">
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
+
+  <!-- THIS IS A WORKING INDEX.HTML. The only difference with this and waqaap065 is the json file name -->
+  <!-- All the table info and table js code comes from this guy: https://github.com/wenzhixin/bootstrap-table -->
+  
+  </head>
+
+    <style>
+    body{
+      padding-top: 40px
+    }
+    </style>
+
+  <body data-spy="scroll" data-target="#my-navbar">
+  
+  <!-- NavBar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="mynavbar">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a href="" class="navbar-brand">WSE Builds</a>
+          </div><!--navbar header-->
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+          <a href="" class="btn btn-warning navbar-btn navbar-right">Download CSV</a>
+            <ul class="nav navbar-nav">
+              <li><a href="#chart">Chart</a></li>
+              <li><a href="https://portal.homedepot.com/sites/winmte/default.aspx">Sharepoint</a></li>
+              <li><a href="http://confluence.homedepot.com/">Confluence</a></li>
+              <li><a href="https://thdengops.slack.com/messages/wse_osd_development">Contact Us</a></li>
+              <li><a href="https://oses.homedepot.com/">GitLab</a></li>
+            </ul>
+          </div>
+        </div>  <!--container-->
+    </nav> <!-- End NavBar -->
+        
+    <!-- jumbotron -->
+
+    <div class="jumbotron" id="chart">
+      <div class="container text-center">
+         <h1>WSE Builds</h1>
+           <p>This site was created to take a quick look at WSE's OSD build process on a weekly basis.</p>
+
+           <div class="btn-group">
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-lg btn-warning">Older Reports</a>
+              <a href="" class="btn btn-lg btn-default">Current Report</a>
+              <a href="" class="btn btn-lg btn-warning">Newer Reports</a>
+
+      </div> <!-- End Container -->
+      
+    </div><!--End jumbotron-->
+
+    <div class="container">
+      
+      
+    </div>
+    <!-- end container -->
+<hr>
+<!-- Chart -->
+    <div class="container">
+      <h3 class="text-center">WSE Build Results</h3>
+         <table data-toggle="table" data-url="Larry.json" data-row-style="rowStyle">
+           <thead class="thead-inverse">
+             <tr>
+                 <th data-field="Section">Section</th>
+                 <th data-field="Message" class="text-center" >Message</th>
+                 <th data-field="Status" class="text-center">Status</th>
+             </tr>
+          </thead>
+        </table>
+        
+    </div>
+      
+
+<!-- end Chart -->
+
+
+<script>
+    function rowStyle(row, index) {
+      console.log(row,index)
+        var colors = ['active', 'success', 'info', 'warning', 'danger'];
+
+        if (row.Status === 'True') {
+            return {
+                classes: colors[1] // classes: 'success' would have worked too
+            };
+        }
+        
+          return {
+            classes: colors[4] // classes: 'danger' would have worked too
+          };
+        
+    }
+</script>
+
+ </body>
+
+</html>

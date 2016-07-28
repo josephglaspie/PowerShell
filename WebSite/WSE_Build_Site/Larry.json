@@ -1,0 +1,167 @@
+[
+    {
+        "Section":  "Setup Prerequisites",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Check if Inactive WIM is attached to Task Sequence",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Rename WIM in Console",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Switch WIM in Task Sequence",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Check Original ISO Hash",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Copy ISO",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Verify ISO Copied Correctly",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Mount ISO",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Get location location of mounted ISO",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Get WIm information",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Export Windows Image",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Verify Windows Image",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Create Path if it does not exist",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Mount WIM",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Check Features",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Change Features",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Commit Wim",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Create HASH of WIM",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Backup Current WIM",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Copy WIM to SCCM Location",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Verify Copy of WIM to SCCM Location",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Create New Image",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Start-WIMServicing",
+        "Status":  "True",
+        "Message":  "Pass 1"
+    },
+    {
+        "Section":  "Wait-WimServicing",
+        "Status":  "True",
+        "Message":  "Pass 1"
+    },
+    {
+        "Section":  "Get-WimServicingProgress",
+        "Status":  "True",
+        "Message":  "Pass 1"
+    },
+    {
+        "Section":  "ServiceWim To Completion.",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Create ISO.",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Distribute the Content of the wim.",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Create HASH of ISO.",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Test the ISO and Report Status",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Connect to Packer Server",
+        "Status":  "True",
+        "Message":  ""
+    },
+    {
+        "Section":  "Copy Iso To Packer",
+        "Status":  "False",
+        "Message":  "Unable to Copy Iso to Packer Server: The process cannot access the file \u0027z:\\iso\\OSEISOBuildTest.iso\u0027 because it is being used by another process."
+    },
+    {
+        "Section":  "Final Cleanup",
+        "Status":  "True",
+        "Message":  ""
+    }
+]
