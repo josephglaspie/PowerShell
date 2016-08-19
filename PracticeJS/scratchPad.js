@@ -1,3 +1,86 @@
+//This and global obj //////////////////////////////////////
+
+function alert() {
+    "use strict";
+    console.log("Hello!!");
+}
+alert();
+
+
+function sayHello() {
+    window.alert("Hello");
+}
+
+window.sayHello();
+
+//same as above, the window obj is implied
+function sayHello() {
+    "use strict";
+    alert("Hello");
+}
+
+sayHello();
+
+
+//Obj literals //////////////////////////////////////
+//Less elegant:
+var mark = {
+    name: "Mark",
+    tshirtColor: "navy blue"
+};
+
+var lisa = {
+    name: "Lisa",
+    tshirtColor: "red"
+};
+
+//More elegant:
+function Friend(name, tshirtColor) {
+    this.name = name;
+    this.tshirtColor = tshirtColor;
+    
+}
+
+var denny = new Friend("Denny", "green");
+alert(denny.name);
+alert(denny.tshirtColor);
+
+//Methods //////////////////////////////////////
+
+var myCoffee = {
+    flavor: "espresso",
+    temperature: "pipping hot",
+    ounces: 100,
+    milk: true,
+    
+    reheat: function(){
+        "use strict";//creating the a method here
+        if(myCoffee.temperature !== "pipping hot"){ //checks
+            myCoffee.temperature = "pipping hot"; //sets temp
+            alert("Your coffee has been reheated!");
+        }
+        else{alert("The coffe is already perfect, no need to reheat.")}
+    }
+};
+
+myCoffee.temperature = "warm";
+
+myCoffee.reheat(); //this last part is a method that 'reheats the coffee'
+
+//objects //////////////////////////////////////
+var coffeeFlavor = "espresso";
+var coffeeTemperature = "pipping hot";
+var coffeeOunces = 100;
+var coffeeMilk = true;
+
+var myCoffee = {
+    flavor: "espresso",
+    temperature: "pipping hot",
+    ounces: 100,
+    milk: true
+};
+alert(myCoffee.ounces);
+
 //Java File
 //Array //////////////////////////////////////
 var friends = ["Mark", "Lisa", "Denny", "Peter", "Steven", "Claudette"];
@@ -21,6 +104,7 @@ function randomNumber() {
 randomNumber();
 //square
 function calculateAreaSquare(side) {
+    "use strict";
     console.log(side * side);
 }
 calculateAreaSquare(5);
