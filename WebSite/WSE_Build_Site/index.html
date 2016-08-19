@@ -13,9 +13,19 @@
     <script src="assets/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <!-- <script src="ga.js"></script> -->
+    <!-- Bootstrap -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="css/bootstrap-table.min.css"> -->
+    <!-- <link rel="stylesheet" href="css/bootstrap-table.css"> -->
 
-  <!-- THIS IS A WORKING INDEX.HTML. The only difference with this and waqaap065 is the json file name -->
-  <!-- All the table info and table js code comes from this guy: https://github.com/wenzhixin/bootstrap-table -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--  <script src="js/bootstrap-table.min.js"></script>
+      <script src="js/html5shiv.min.js"></script> 
+      <script src="js/respond.min.js"></script>  -->
+  
   
   </head>
 
@@ -36,6 +46,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
             </button>
 
             <a href="" class="navbar-brand">WSE Builds</a>
@@ -43,11 +54,12 @@
           <div class="collapse navbar-collapse" id="navbar-collapse">
           <a href="" class="btn btn-warning navbar-btn navbar-right">Download CSV</a>
             <ul class="nav navbar-nav">
-              <li><a href="#chart">Chart</a></li>
+              <li><a href="#top">Top</a></li>
               <li><a href="https://portal.homedepot.com/sites/winmte/default.aspx">Sharepoint</a></li>
-              <li><a href="http://confluence.homedepot.com/">Confluence</a></li>
+              <li><a href="https://confluence.homedepot.com/display/OSA/Windows+Server+Baseline+Configuration+Standards">Confluence</a></li>
               <li><a href="https://thdengops.slack.com/messages/wse_osd_development">Contact Us</a></li>
-              <li><a href="https://oses.homedepot.com/">GitLab</a></li>
+              <li><a href="http://oses.homedepot.com/Windows_Eng">GitLab</a></li>
+        <li><a href="https://oses.homedepot.com/win_server_baseline/deployment/wikis/ws-build-map">BuildMap</a></li>
             </ul>
           </div>
         </div>  <!--container-->
@@ -55,15 +67,17 @@
         
     <!-- jumbotron -->
 
-    <div class="jumbotron" id="chart">
-      <div class="container text-center">
+    <div class="jumbotron" id="top">
+      <div class="container text-center" >
          <h1>WSE Builds</h1>
-           <p>This site was created to take a quick look at WSE's OSD build process on a weekly basis.</p>
-
+           <p>Click on a button below for results.</p>
+         
            <div class="btn-group">
-              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-lg btn-warning">Older Reports</a>
-              <a href="" class="btn btn-lg btn-default">Current Report</a>
-              <a href="" class="btn btn-lg btn-warning">Newer Reports</a>
+              <a href="#2008" class="btn btn-lg btn-warning">2008</a>
+              <a href="#2008r2" class="btn btn-lg btn-warning">2008 R2</a>
+              <a href="#2012" class="btn btn-lg btn-warning">2012</a>
+              <a href="#2012r2" class="btn btn-lg btn-warning">2012 R2</a>
+              <a href="#2016" class="btn btn-lg btn-warning">2016</a>        
 
       </div> <!-- End Container -->
       
@@ -75,15 +89,93 @@
     </div>
     <!-- end container -->
 <hr>
-<!-- Chart -->
-    <div class="container">
-      <h3 class="text-center">WSE Build Results</h3>
-         <table data-toggle="table" data-url="Larry.json" data-row-style="rowStyle">
+
+<!-- 2008 Chart -->
+    <div class="container" id="2008">
+      <h3 class="text-center">2008 Build Results</h3>
+         <table data-toggle="table" data-url="WSEbuild2008.json" data-row-style="rowStyle">
            <thead class="thead-inverse">
              <tr>
                  <th data-field="Section">Section</th>
                  <th data-field="Message" class="text-center" >Message</th>
                  <th data-field="Status" class="text-center">Status</th>
+                 <th data-field="Date" class="text-center">Date/Time</th>
+             </tr>
+          </thead>
+        </table>
+        
+    </div>
+      
+
+<!-- end Chart -->
+
+<!-- 2008r2 Chart -->
+    <div class="container" id="2008r2">
+      <h3 class="text-center">2008 R2 Build Results</h3>
+         <table data-toggle="table" data-url="WSEbuild2008r2.json" data-row-style="rowStyle">
+           <thead class="thead-inverse">
+             <tr>
+                 <th data-field="Section">Section</th>
+                 <th data-field="Message" class="text-center" >Message</th>
+                 <th data-field="Status" class="text-center">Status</th>
+                 <th data-field="Date" class="text-center">Date/Time</th>
+             </tr>
+          </thead>
+        </table>
+        
+    </div>
+      
+
+<!-- end Chart -->
+
+<!-- 2012r2 Chart -->
+    <div class="container" id="2012">
+      <h3 class="text-center">2012 Build Results</h3>
+         <table data-toggle="table" data-url="WSEbuild2012.json" data-row-style="rowStyle">
+           <thead class="thead-inverse">
+             <tr>
+                 <th data-field="Section">Section</th>
+                 <th data-field="Message" class="text-center" >Message</th>
+                 <th data-field="Status" class="text-center">Status</th>
+                 <th data-field="Date" class="text-center">Date/Time</th>
+             </tr>
+          </thead>
+        </table>
+        
+    </div>
+      
+
+<!-- end Chart -->
+
+<!-- 2012r2 Chart -->
+    <div class="container" id="2012r2">
+      <h3 class="text-center">2012 R2 Build Results</h3>
+         <table data-toggle="table" data-url="WSEbuild2012r2.json" data-row-style="rowStyle">
+           <thead class="thead-inverse">
+             <tr>
+                 <th data-field="Section">Section</th>
+                 <th data-field="Message" class="text-center" >Message</th>
+                 <th data-field="Status" class="text-center">Status</th>
+                 <th data-field="Date" class="text-center">Date/Time</th>
+             </tr>
+          </thead>
+        </table>
+        
+    </div>
+      
+
+<!-- end Chart -->
+
+<!-- 2012r2 Chart -->
+    <div class="container" id="2016">
+      <h3 class="text-center">2016 Build Results</h3>
+         <table data-toggle="table" data-url="WSEbuild2016.json" data-row-style="rowStyle">
+           <thead class="thead-inverse">
+             <tr>
+                 <th data-field="Section">Section</th>
+                 <th data-field="Message" class="text-center" >Message</th>
+                 <th data-field="Status" class="text-center">Status</th>
+                 <th data-field="Date" class="text-center">Date/Time</th>
              </tr>
           </thead>
         </table>
@@ -96,21 +188,50 @@
 
 <script>
     function rowStyle(row, index) {
-      console.log(row,index)
+      //console.log(row,index)
         var colors = ['active', 'success', 'info', 'warning', 'danger'];
 
         if (row.Status === 'True') {
             return {
-                classes: colors[1] // classes: 'success' would have worked too
+                classes: colors[1] //classes: 'success' would have worked too
             };
         }
         
           return {
-            classes: colors[4] // classes: 'danger' would have worked too
-          };
+            classes: colors[4] //classes: 'danger' would have worked too
+          }
         
     }
 </script>
+
+
+
+<!-- 
+<script>
+    function rowStyle(row, index) {
+
+      console.log('index');
+      console.log(index);
+      console.log('row');
+      console.log(row);
+      // var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+      //   if (index % 2 === 0 && index / 2 < classes.length) {
+      //       return {
+      //           classes: classes[index / 2]
+      //       };
+      //   }
+      //   return {}; 
+   }
+</script> -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- <script src="js/jquery.min.js"></script>  -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- <script src="js/bootstrap.min.js"></script>   
+<script src="js/bootstrap-table.js"></script>
+<script src="js/bootstrap-table-en-US.min.js"></script>
+ -->
 
  </body>
 
