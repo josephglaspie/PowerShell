@@ -12,3 +12,5 @@ Install-ADDSForest -CreateDnsDelegation:0 `
     -SysvolPath 'C:\Windows\SYSVOL' `
     -Force:1 `
     -SafeModeAdministratorPassword $pw
+
+    

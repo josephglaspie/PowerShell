@@ -1,5 +1,4 @@
-<<<<<<< HEAD:Scripts/NewHyperVMachineScript.ps1
-﻿#region Setup NIC
+#region Setup NIC
 $GlaspiePcPwd = Read-Host "Glaspie-PC password"
 $IP = '192.168.1.110'
 $Mask = '24'
@@ -22,6 +21,17 @@ $adapter | New-NetIPAddress -AddressFamily $IPType -IPAddress $IP -DefaultGatewa
 $adapter | Set-DnsClientServerAddress -ServerAddresses $DNS
 #endregion
 
+#region enable RDP
+#1) Enable Remote Desktop
+set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+
+#2) Allow incoming RDP on firewall
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+#3) Enable secure RDP authentication
+set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1   
+#endregion
+
 #region enable PSremoting from any machine
 winrm s winrm/config/client '@{TrustedHosts="*"}'
 Enable-PSRemoting -Confirm:0
@@ -39,6 +49,7 @@ Write-Host "IE Enhanced Security Configuration (ESC) has been disabled." -Foregr
 #region Setup HyperV Dirs
 if(!(Test-Path "C:\HyperV\ISOs")){MKDIR "C:\HyperV\ISOs"}
 if(!(Test-Path "C:\HyperV\VMs")){MKDIR "C:\HyperV\VMs"}
+if(!(Test-Path "C:\HyperV\VHDXs\Base")){MKDIR "C:\HyperV\VHDXs\Base"}
 #endregion
 
 #region Setup Git
@@ -53,20 +64,21 @@ if(!(Test-Path \\192.168.1.8\isos\BuildScripts\Git-2.8.3-64-bit.exe)){
     (New-Object System.Net.WebClient).DownloadFile($url, $output)
     Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
     }
+robocopy \\192.168.1.8\isos C:\HyperV\VHDXs\Base *.vhdx
 robocopy \\192.168.1.8\isos\BuildScripts\ C:\GitHub 
 NET USE \\192.168.1.8\isos\BuildScripts /D
-.\C:\GitHub\Git-2.8.3-64-bit.exe /VERYSILENT
+   C:\GitHub\Git-2.8.3-64-bit.exe /VERYSILENT
 #endregion
 
 #region Install Active Directory, HyperV, and DNS Binaries REBOOT
-Get-WindowsFeature AD-Domain-Services,Hyper-V,DNS | Install-WindowsFeature -IncludeManagementTools -IncludeAllSubFeature -Confirm:0
+Get-WindowsFeature AD-Domain-Services,Hyper-V,DNS,AS-NET-Framework,WAS-NET-Environment | Install-WindowsFeature -IncludeManagementTools -IncludeAllSubFeature -Confirm:0
 $FeaturesTXT = "c:\temp\Features.txt"
 New-Item $FeaturesTXT -ItemType File -Force 
 Get-WindowsFeature | where installed >> $FeaturesTXT
 Rename-Computer HyperV1 -Restart:1 -Confirm:0
 #endregion
-=======
-﻿#region Setup NIC
+
+#region Setup NIC
 
 $IP = '192.168.1.110'
 $Mask = '24'
@@ -87,11 +99,6 @@ $adapter | New-NetIPAddress -AddressFamily $IPType -IPAddress $IP -DefaultGatewa
 
 #Configure DNS
 $adapter | Set-DnsClientServerAddress -ServerAddresses $DNS
-#endregion
-
-#region enable PSremoting from any machine
-winrm s winrm/config/client '@{TrustedHosts="*"}'
-Enable-PSRemoting -Confirm:0
 #endregion
 
 #region DisableIE enhanced Secuity
@@ -120,4 +127,3 @@ New-Item $FeaturesTXT -ItemType File -Force
 Get-WindowsFeature | where installed >> $FeaturesTXT
 Rename-Computer HyperV1 -Restart:1 -Confirm:0
 #endregion
->>>>>>> 244fcbf9f37cca2caa68145b34b7b39902f272ac:BuildScripts/NewHyperVMachineScript.ps1
