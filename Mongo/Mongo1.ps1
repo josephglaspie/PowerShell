@@ -37,6 +37,14 @@ load('safer.js') #load script
 #load script automatically like a PS profile
 $content =Get-Content 'C:\Pluralsight\safer.js' ; Add-Content $content -Path C:\Users\Glaspie\.mongorc.js -Force -PassThru
 
+show collections
+db.foo.save({_id:1, x:10})
+db.foo.find()
+db.users.save({Name:'Bob'})
+db.users.find()
+ObjectId()
+ObjectId().getTimestamp()
+
 #endregion
 
 #region CMD

@@ -1,0 +1,29 @@
+https://app.pluralsight.com/player?course=building-angularjs-nodejs-apps-mean&author=joe-eames&name=building-angularjs-nodejs-apps-mean-m2&clip=4&mode=live
+cd C:\node\
+  2 npm help json
+  3 npm init
+  4 cd c:\
+  5 cd .\GitHub\
+  6 ls
+  7 cd .\ScriptsHome\
+  8 ls
+  9 mkdir AngularNode
+ 10 cd .\AngularNode\
+ 11 npm init
+ 12 ls
+ 13 npm install --save express jade
+ 14 git status
+ 15 ls
+ 16 git status
+ 17 git commit -m 'new'
+ 18 git add -A
+ 19 ls
+ 20 npm install bower -g
+ 21 bower init
+ 22 bower install jqery --save
+ 23 bower install jquery --save
+ 24 bower install toastr --save
+ 25 install angualr angular --save
+ 26 bower install angualr angular --save
+ 27 bower install angular angular --save
+ 28 bower install angular angular-resource angular-route --save

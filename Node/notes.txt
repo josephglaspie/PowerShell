@@ -1,0 +1,26 @@
+Go online and install node.js
+cd C:\GitHub\ScriptsHome\Node\
+ls
+node --version
+ls
+node .\app.js
+node .\app.js
+npm init ## creates package.json  that will run script at startup with this "start": "node app.js"
+cd C:\GitHub\ScriptsHome\Node\
+npm install express --save #NPM is backend package manager Bower is web package manager
+node .\app.js
+npm start
+npm install bower -g
+bower
+bower init
+bower install --save bootstrap
+npm start
+#now we create .bowerrc, delete bower_components folder, and rerun bower install --save bootstrap
+#changed lines 9,10,250,251 to match local paths ex:lib/jquery/dist/jquery.min.js
+bower install font-awesome --save #using bower for font awesome instead of cnd as on line 10 of index.html
+#Downloaded files https://github.com/jonathanfmills/CodingStandards .jscsrc & .jshintrc in root
+npm install gulp --save-dev
+#created gulpfile.js
+npm install --save-dev gulp-jshint gulp-jscs jshint-stylish
+gulp style
+npm install wiredep --save-dev
