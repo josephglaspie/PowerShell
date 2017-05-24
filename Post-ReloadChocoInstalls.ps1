@@ -1,5 +1,5 @@
 #region Install apps
-$originl=Get-ExecutionPolicy
+$Original=Get-ExecutionPolicy
 Set-executionpolicy bypass
 Write-Host "Installing Chocolatey" -ForegroundColor Green
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
