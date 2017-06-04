@@ -73,7 +73,7 @@ NET USE \\192.168.1.8\isos\BuildScripts /D
 Update-Help -Force
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-choco install git 7zip.install notepadplusplus -y
+choco install git 7zip.install notepadplusplus python -y
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
 Get-ExecutionPolicy
 Set-Location C:\GitHub
