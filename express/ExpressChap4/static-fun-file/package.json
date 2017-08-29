@@ -1,0 +1,15 @@
+{
+  "name": "static-fun-file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "JGlaspie",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "morgan": "^1.8.2"
+  }
+}
