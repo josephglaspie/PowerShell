@@ -1,0 +1,65 @@
+;**  Unless otherwise agreed by Intel in writing, you may not remove or      **
+;**  alter this notice or any other notice embedded in Materials by Intel    **
+;**  or Intel’s suppliers or licensors in any way.                           **
+;******************************************************************************
+;
+;******************************************************************************
+
+; e1c63x64.INF (Intel 64 bit extension Platform Only,
+; Windows 8 64 bit extension)
+
+;
+; Intel(R) Gigabit Network connections
+;******************************************************************************
+;
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %Intel%
+CatalogFile = e1c63x64.cat
+DriverVer   = 03/29/2012,12.1.10.0
+
+[Manufacturer]
+%Intel%     = Intel, NTamd64.6.2, NTamd64.6.2.1
+
+[ControlFlags]
+;ExcludeFromSelect = \
+;    PCI\VEN_8086&DEV_1502,\
+;    PCI\VEN_8086&DEV_1503
+
+[Intel]
+
+[Intel.NTamd64.6.2.1]
+; DisplayName                   Section              DeviceID
+; -----------                   -------              --------
+%E1502NC.DeviceDesc%            = E1502.6.2.1,       PCI\VEN_8086&DEV_1502
+%E1502NC.DeviceDesc%            = E1502.6.2.1,       PCI\VEN_8086&DEV_1502&SUBSYS_00011179
+%E1502NC.DeviceDesc%            = E1502.6.2.1,       PCI\VEN_8086&DEV_1502&SUBSYS_00021179
+%E1502NC.DeviceDesc%            = E1502.6.2.1,       PCI\VEN_8086&DEV_1502&SUBSYS_80001025
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_00011179
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_00021179
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_80001025
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_04911025
+
+[Intel.NTamd64.6.2]
+; DisplayName                   Section        DeviceID
+; -----------                   -------        --------
+%E1502NC.DeviceDesc%            = E1502,       PCI\VEN_8086&DEV_1502
+%E1502NC.DeviceDesc%            = E1502,       PCI\VEN_8086&DEV_1502&SUBSYS_00011179
+%E1502NC.DeviceDesc%            = E1502,       PCI\VEN_8086&DEV_1502&SUBSYS_00021179
+%E1502NC.DeviceDesc%            = E1502,       PCI\VEN_8086&DEV_1502&SUBSYS_80001025
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_00011179
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_00021179
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_80001025
+%E1503NC.DeviceDesc%            = E1503.6.2.1,       PCI\VEN_8086&DEV_1503&SUBSYS_04911025
+
+;===============================================================================
+
+;                WINDOWS 8 for 64-bit EXTENDED PLATFORMS
+
+;
+;===============================================================================
