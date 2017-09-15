@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<% include templates/adminheader.ejs %>
+<h1>Respond to Club Requests</h1>
+
+<form action="/clubreq" method="post">
+    <% for (var i in clubreq){%>
+        Club Name: <input type="text" name="clubname[]" value="<%= clubreq[i].clubname %>" /><br><br>
+        Club Type: <input type="text" name="clubtype[]" value="<%= clubreq[i].type %>" /><br><br>
+        <input type="submit" value="accept"/><br><br><hr>
+    <%} %>
+</form>
+
+</body>
+</html>
