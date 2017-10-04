@@ -1,0 +1,22 @@
+{
+    "name": "TestEJS",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "author": "jglaspie",
+    "license": "ISC",
+    "dependencies": {
+        "@sendgrid/mail": "^6.1.3",
+        "body-parser": "^1.18.1",
+        "dotenv": "^4.0.0",
+        "nodemon": "^1.12.0",
+        "ejs": "^2.5.7",
+        "express": "^4.15.4",
+        "morgan": "^1.8.2",
+        "nodemailer": "^4.1.0"
+    }
+}
